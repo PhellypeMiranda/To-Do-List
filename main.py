@@ -1,24 +1,23 @@
 import funcs
 
-def escolhas(escolha, lista):
+def escolhas(escolha):
     match escolha:
         case 1:
-            funcs.adicionar(lista)
+            funcs.adicionar()
         case 2:
-            funcs.remover(lista)
+            funcs.remover()
         case 3:
-            funcs.limpar(lista)
+            funcs.limpar()
         case 4:
-            funcs.sair(lista)
+            funcs.sair()
         case _:
             input("Opção inválida!")
 
 def main():
-    lista = funcs.ler_json()
     #Menu principal, o usuário vai escolher qual caminho seguir.
     while True:
         try:
-            funcs.mostrar_lista(lista)
+            funcs.mostrar_lista()
             escolha = int(input("\nO que gostaria de fazer?\n"
                             "1 - Adicionar item a lista\n"
                             "2 - Remover item da lista\n"
@@ -26,7 +25,7 @@ def main():
                             "4 - Sair\n"
                             "Digite um valor: "))
 
-            escolhas(escolha, lista)
+            escolhas(escolha)
 
         #Except para caso o usuário digitar uma letra
         except (ValueError, IndexError):

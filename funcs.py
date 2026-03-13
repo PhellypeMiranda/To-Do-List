@@ -1,13 +1,9 @@
 import sys
 import os
 import storage
-import json
 
-def ler_json():
-    with open("tasks.json", "r") as file:
-        return json.load(file)
-
-def mostrar_lista(lista):
+def mostrar_lista():
+    lista = storage.ler_json()
     os.system("clear")  # Linux
     print("\nTO DO:")
     if len(lista) == 0:
@@ -16,13 +12,15 @@ def mostrar_lista(lista):
         for i, novo in enumerate(lista, start=1):
             print(f"{i} - {novo}")
 
-def adicionar(lista):
+def adicionar():
+    lista = storage.ler_json()
     novo = input("Adicione uma tarefa: ")
     lista.append(novo)
     storage.modificar_json(lista)
     input("Tarefa adicionada com sucesso! Aperte qualquer tecla para continuar.")
 
-def remover(lista):
+def remover():
+    lista = storage.ler_json()
     if len(lista) == 0:
         input("A lista já está vazia!\n ")
     else:
@@ -39,14 +37,15 @@ def remover(lista):
         except (ValueError, IndexError):
             input("Valor inválido! Aperte qualquer tecla para continuar.")
 
-def limpar(lista):
+def limpar():
+    lista = storage.ler_json()
     confirmacao = input("Tem certeza que quer limpar a lista? (Y/N) ").strip()
     if confirmacao.lower() == "y":
         lista.clear()
         storage.modificar_json(lista)
         input("Lista esvaziada com sucesso! Aperte qualquer tecla para continuar")
 
-def sair(lista):
+def sair():
     confirmacao = input("Tem certeza que quer sair? (Y/N) ").strip()
     if confirmacao.lower() == "y":
         sys.exit(0)
