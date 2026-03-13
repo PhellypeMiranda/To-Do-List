@@ -26,6 +26,11 @@ def main():
                             print(f"- {i}")
                         input("Aperte qualquer tecla para continuar")
 
+                case 2:
+                    novo = input("Tarefa: ")
+                    lista.append(novo)
+                    input("Tarefa adicionada com sucesso!\n")
+
         #Except para caso o usuário digitar uma letra
         except ValueError:
             input("\nValor inválido, por favor digite novamente!\n ")
