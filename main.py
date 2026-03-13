@@ -14,7 +14,7 @@ def escolhas(escolha, lista):
             input("Opção inválida!")
 
 def main():
-    lista = []
+    lista = funcs.ler_json()
     #Menu principal, o usuário vai escolher qual caminho seguir.
     while True:
         try:
