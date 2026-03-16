@@ -1,10 +1,14 @@
 import json
 
-def ler_json():
-    with open("tasks.json", "r") as file:
-        return json.load(file)
+def read_json():
+    try:
+        with open("tasks.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        with open("tasks.json", "w") as file:
+            json.dump([], file)
+        return []
 
-def modificar_json(lista):
-    conversor = json.dumps(lista)
+def modify_json(items_list):
     with open("tasks.json", "w") as file:
-        file.write(conversor)
+        json.dump(items_list, file, indent=4)
