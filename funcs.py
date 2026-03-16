@@ -4,7 +4,7 @@ import storage
 
 def mostrar_lista():
     lista = storage.ler_json()
-    os.system("clear")  # Linux
+    limpar_tela()  # Linux
     print("\nTO DO:")
     if len(lista) == 0:
         print("Lista vazia!\n ")
@@ -37,7 +37,7 @@ def remover():
         except (ValueError, IndexError):
             input("Valor inválido! Aperte qualquer tecla para continuar.")
 
-def limpar():
+def limpar_lista():
     lista = storage.ler_json()
     confirmacao = input("Tem certeza que quer limpar a lista? (Y/N) ").strip()
     if confirmacao.lower() == "y":
@@ -49,3 +49,9 @@ def sair():
     confirmacao = input("Tem certeza que quer sair? (Y/N) ").strip()
     if confirmacao.lower() == "y":
         sys.exit(0)
+
+def limpar_tela():
+    if os.name == "nt":  # Windows
+        os.system("cls")
+    else:  # Linux / macOS
+        os.system("clear")

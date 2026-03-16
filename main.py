@@ -7,7 +7,7 @@ def escolhas(escolha):
         case 2:
             funcs.remover()
         case 3:
-            funcs.limpar()
+            funcs.limpar_lista()
         case 4:
             funcs.sair()
         case _:
