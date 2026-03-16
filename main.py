@@ -10,7 +10,7 @@ def choices(choice, items_list):
         case 3:
             funcs.clear_list(items_list)
         case 4:
-            funcs.save_and_exit()
+            funcs.save_and_exit(items_list)
         case _:
             input("Invalid option, please try again!")
 
