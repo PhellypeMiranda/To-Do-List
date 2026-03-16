@@ -26,7 +26,7 @@ def main():
         try:
             funcs.show_list(items_list)
             count = funcs.count(items_list)
-            print(f"\nFinished {count["finished"]}, unfinished {count["unfinished"]}!")
+            print(f"\nFinished {count['finished']}, unfinished {count['unfinished']}!")
             menu = int(input("\nWhat do you want to do?\n"
                             "1 - Add item to the list\n"
                             "2 - Mark/Unmark item\n"

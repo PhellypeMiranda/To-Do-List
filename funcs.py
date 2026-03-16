@@ -27,7 +27,7 @@ def show_list(items_list):
             if item["checked"] == 1:
                 print(f"{i} - [X] {item['name']}")
             else:
-                print(f"{i} - [ ] {item["name"]}")
+                print(f"{i} - [ ] {item['name']}")
 
 def add_item(items_list):
     while True:
