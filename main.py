@@ -1,35 +1,33 @@
 import funcs
 
-def escolhas(escolha):
-    match escolha:
+# this function calls from funcs.py the required action from the user
+def choices(choice, items_list):
+    match choice:
         case 1:
-            funcs.adicionar()
+            funcs.add_item(items_list)
         case 2:
-            funcs.remover()
+            funcs.remove_item(items_list)
         case 3:
-            funcs.limpar_lista()
+            funcs.clear_list(items_list)
         case 4:
-            funcs.sair()
+            funcs.save_and_exit()
         case _:
-            input("Opção inválida!")
+            input("Invalid option, please try again!")
 
+# This is the main function, it works has a main menu of the program
+# where the user see the list and decide what to do.
 def main():
-    #Menu principal, o usuário vai escolher qual caminho seguir.
+    items_list = funcs.get_list()
     while True:
         try:
-            funcs.mostrar_lista()
-            escolha = int(input("\nO que gostaria de fazer?\n"
-                            "1 - Adicionar item a lista\n"
-                            "2 - Remover item da lista\n"
-                            "3 - Apagar lista\n"
-                            "4 - Sair\n"
-                            "Digite um valor: "))
-
-            escolhas(escolha)
-
-        #Except para caso o usuário digitar uma letra
+            funcs.show_list(items_list)
+            menu = int(input("\nWhat do you want to do?\n"
+                            "1 - Add item to the list\n"
+                            "2 - Remove item from the list\n"
+                            "3 - Clear list\n"
+                            "4 - Save and exit\n"
+                            "Type a number: "))
+            choices(menu, items_list)
         except (ValueError, IndexError):
-            input("\nValor inválido, por favor digite novamente!\n ")
-        #Except para erros não previstos
-
+            input("\nInvalid value, try again!\n ")
 main()
