@@ -6,7 +6,7 @@ def read_json():
             return json.load(file)
     except FileNotFoundError:
         with open("tasks.json", "w") as file:
-            json.dump([], file)
+            json.dump([], file, indent=4)
         return []
 
 def modify_json(items_list):
