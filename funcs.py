@@ -3,12 +3,15 @@ import os
 import storage
 
 def count(items_list):
-    check = [0, 0]
+    check = {
+        "finished": 0,
+        "unfinished": 0
+    }
     for item in items_list:
         if item["checked"] == 1:
-            check[0] += 1
+            check["finished"] += 1
         else:
-            check[1] += 1
+            check["unfinished"] += 1
     return check
 
 def get_list():
@@ -47,6 +50,7 @@ def mark_as_checked(items_list):
                 item = int(input("Which one do you want to mark/unmark? "))
                 if item > len(items_list) or item <= 0:
                     print("Invalid value! try again.")
+                    continue
                 else:
                     changed_item = items_list[item - 1]
                     if changed_item["checked"] == 0:
@@ -57,6 +61,7 @@ def mark_as_checked(items_list):
                         break
             except (ValueError, IndexError):
                 print("Invalid value! try again.")
+                continue
 
 def change_item(items_list):
     if not items_list:
@@ -67,13 +72,21 @@ def change_item(items_list):
                 item = int(input("Which one do you want change? "))
                 if item > len(items_list) or item <= 0:
                     print("Invalid value! try again.")
+                    continue
                 else:
-                    change = input("Type the new task: ")
-                    changed_item = items_list[item - 1]
-                    changed_item["name"] = change
+                    while True:
+                        change = input("Type the new task: ").strip()
+                        if not change:
+                            print("Type the name of the task")
+                            continue
+                        else:
+                            changed_item = items_list[item - 1]
+                            changed_item["name"] = change
+                            break
                     break
             except (ValueError, IndexError):
                 print("Invalid value! try again.")
+                continue
 
 def remove_item(items_list):
     if not items_list:
@@ -84,9 +97,10 @@ def remove_item(items_list):
                 item = int(input("Which one do you want to remove? "))
                 if item > len(items_list) or item <= 0:
                     print("Invalid value! try again.")
+                    continue
                 else:
                     changed_item = items_list[item - 1]
-                    confirmation = input(f"Are you sure you want to remove {changed_item["checked"]}? (Y/N): ").strip()
+                    confirmation = input(f"Are you sure you want to remove {changed_item["name"]}? (Y/N): ").strip()
                     if confirmation.lower() == "y":
                         items_list.pop(item - 1)
                         break
@@ -94,6 +108,7 @@ def remove_item(items_list):
                         break
             except (ValueError, IndexError):
                 print("Invalid value! try again.")
+                continue
 
 def clear_list(items_list):
     confirmation = input("Are you sure you want to clear the list? (Y/N) ").strip()
@@ -103,7 +118,7 @@ def clear_list(items_list):
 
 def save_and_exit(items_list):
     confirmation = input("Are you sure you want save and exit? (Y/N) ").strip()
-    if confirmation.lower() == "y":
+    if confirmation.lower() == "y" and confirmation.lower() != "n":
         storage.modify_json(items_list)
         sys.exit(0)
 
