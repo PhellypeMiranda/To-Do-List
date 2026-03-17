@@ -1,14 +1,9 @@
 import json
 
-def read_json():
-    try:
-        with open("tasks.json", "r") as file:
-            return json.load(file)
-    except FileNotFoundError:
-        with open("tasks.json", "w") as file:
-            json.dump([], file, indent=4)
-        return []
+class Storage:
+    def __init__(self, file="tasks.json"):
+        self.File = file
 
-def modify_json(items_list):
-    with open("tasks.json", "w") as file:
-        json.dump(items_list, file, indent=4)
+    def save(self, items_list):
+        with open(self.File, "w") as f:
+            json.dump(items_list, f, indent=4)

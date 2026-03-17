@@ -1,41 +1,33 @@
-import funcs
+from todo_list import ToDoList
+from tasks import Task
+import services
 
-# this function calls from funcs.py the required action from the user
-def choices(choice, items_list):
-    match choice:
+items_list = ToDoList()
+while True:
+    services.show_list(items_list)
+    try:
+        menu = int(input("\nMenu:\n"
+                         "1 - Add an item to the list.\n"
+                         "2 - Remove an item from the list.\n"
+                         "3 - Modify an item from the list.\n"
+                         "4 - Mark/Unmark the item as checked.\n"
+                         "5 - Clear to do list.\n"
+                         "Select an option: "))
+    except ValueError:
+        input("invalid input, try again!")
+        continue
+
+    match menu:
         case 1:
-            funcs.add_item(items_list)
+            services.add_item(items_list)
         case 2:
-            funcs.mark_as_checked(items_list)
+            services.remove_item(items_list)
         case 3:
-            funcs.change_item(items_list)
+            services.modify_item(items_list)
         case 4:
-            funcs.remove_item(items_list)
+            services.mark_item(items_list)
         case 5:
-            funcs.clear_list(items_list)
-        case 6:
-            funcs.save_and_exit(items_list)
+            services.clear_list(items_list)
         case _:
-            input("Invalid option, please try again!")
-
-# This is the main function, it works has a main menu of the program
-# where the user see the list and decide what to do.
-def main():
-    items_list = funcs.get_list()
-    while True:
-        try:
-            funcs.show_list(items_list)
-            count = funcs.count(items_list)
-            print(f"\nFinished {count['finished']}, unfinished {count['unfinished']}!")
-            menu = int(input("\nWhat do you want to do?\n"
-                            "1 - Add item to the list\n"
-                            "2 - Mark/Unmark item\n"
-                            "3 - Change item\n"
-                            "4 - Remove item from the list\n"
-                            "5 - Clear list\n"
-                            "6 - Save and exit\n"
-                            "Type a number: "))
-            choices(menu, items_list)
-        except (ValueError, IndexError):
-            input("\nInvalid value, try again!\n ")
-main()
+            input("invalid input, try again!")
+            continue
