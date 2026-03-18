@@ -2,7 +2,7 @@ import os
 from todo_list import ToDoList
 from tasks import Task
 
-def check_if_empty_list(items_list):
+def check_if_not_empty(items_list):
     if not items_list:
         input("The list is empty, press enter to continue...")
         return False
@@ -28,9 +28,13 @@ def clear_screen():
         os.system("clear")
 
 def confirmation(action):
-    confirmation = input(f"Are you sure you want to {action}? (Y/N): ").lower().strip()
-    if confirmation == "y":
-        return True
+    while True:
+        answer = input(f"Are you sure you want to {action}? (Y/N): ").lower().strip()
+        if answer == "y":
+            return True
+        if answer == "n":
+            return False
+        print("Invalid input, try again.")
 
 def convert_obj_to_json(items_list):
     converted_list = []

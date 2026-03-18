@@ -17,19 +17,19 @@ def show_list(items_list):
     else:
         count = 1
         for item in items_list:
-            if item.checked == True:
+            if item.checked:
                 print(f"{count} - [X] {item}")
             else:
                 print(f"{count} - [ ] {item}")
             count += 1
 
 def write_item():
-    name = input("Enter new item's name: ").strip().capitalize()
-    if not name:
-        input("Invalid input, try again!")
-        return False
-    else:
-        return name
+    while True:
+        name = input("Enter new item's name: ").strip().capitalize()
+        if name:
+            return name
+        input("Can't be empty, try again!")
+
 
 def add_item(items_list):
     name = write_item()
@@ -39,7 +39,7 @@ def add_item(items_list):
         input("Item added, press enter to continue...")
 
 def remove_item(items_list):
-    if functions.check_if_empty_list(items_list) == True:
+    if functions.check_if_not_empty(items_list) == True:
         item = functions.create_value(items_list)
         if item != False:
             if functions.confirmation('remove item') == True:
@@ -49,24 +49,24 @@ def remove_item(items_list):
                 input("Item not removed, press enter to continue...")
 
 def modify_item(items_list):
-    if functions.check_if_empty_list(items_list) == True:
+    if functions.check_if_not_empty(items_list) == True:
         item = functions.create_value(items_list)
         if item != False:
             new_item = write_item()
-            if functions.confirmation('remove item') == True:
+            if functions.confirmation('modify item') == True:
                 items_list.change_item(item - 1, new_item)
                 input("Item changed, press enter to continue...")
 
 def mark_item(items_list):
-    if functions.check_if_empty_list(items_list) == True:
+    if functions.check_if_not_empty(items_list) == True:
         item = functions.create_value(items_list)
         if item != False:
-            if functions.confirmation('remove item') == True:
+            if functions.confirmation('mark item') == True:
                 items_list[item - 1].toggle()
                 input("Item marked/unmarked, press enter to continue...")
 
 def clear_list(items_list):
-    if functions.check_if_empty_list(items_list) == True:
+    if functions.check_if_not_empty(items_list) == True:
         if functions.confirmation('clear the list') == True:
             items_list.clear()
             input("List cleared, press enter to continue...")
