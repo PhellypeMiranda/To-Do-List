@@ -1,26 +1,16 @@
-from todo_list import ToDoList
+import sys
 from tasks import Task
 from storage import Storage
-from os import exit
+import functions
 
-def validate_tasks(items_list):
-    if not items_list:
-        input("The list is empty, press enter to continue...")
-        return False
-    else:
-        try:
-            item = int(input("Enter the number of the item: "))
-        except ValueError:
-            input("invalid input, try again!")
-            return False
-        if item <= 0 or item > len(items_list):
-            input("Invalid input, press enter to continue...")
-            return False
-        else:
-            return item
-
+def load_list():
+    loader = Storage()
+    items_list = loader.load()
+    converted_list = functions.convert_dic_to_obj(items_list)
+    return converted_list
 
 def show_list(items_list):
+    functions.clear_screen()
     print("\nTO DO:")
     if not items_list:
         print("The list is empty!")
@@ -33,57 +23,66 @@ def show_list(items_list):
                 print(f"{count} - [ ] {item}")
             count += 1
 
-def add_item(items_list):
-    name = input("Enter item name: ").strip().capitalize()
+def write_item():
+    name = input("Enter new item's name: ").strip().capitalize()
     if not name:
         input("Invalid input, try again!")
+        return False
     else:
+        return name
+
+def add_item(items_list):
+    name = write_item()
+    if name != False:
         new_item = Task(name)
         items_list.add_item(new_item)
         input("Item added, press enter to continue...")
 
 def remove_item(items_list):
-    item = validate_tasks(items_list)
-    if item != False:
-        confirmation = input(f"Are you sure you want to remove {items_list[item - 1]}? (Y/N): ").lower().strip()
-        if confirmation == "y":
-            items_list.remove_item(item - 1)
-            input("Item removed, press enter to continue...")
-        else:
-            input("Item not removed, press enter to continue...")
+    if functions.check_if_empty_list(items_list) == True:
+        item = functions.create_value(items_list)
+        if item != False:
+            if functions.confirmation('remove item') == True:
+                items_list.remove_item(item - 1)
+                input("Item removed, press enter to continue...")
+            else:
+                input("Item not removed, press enter to continue...")
 
 def modify_item(items_list):
-    item = validate_tasks(items_list)
-    if item != False:
-        confirmation = input(f"Are you sure you want to modify {items_list[item - 1]}? (Y/N): ").lower().strip()
-        if confirmation == "y":
-            change = input("Write the new task: ")
-            items_list.change_item(item - 1, change)
-            input("Item changed, press enter to continue...")
-        else:
-            input("Item not changed, press enter to continue...")
+    if functions.check_if_empty_list(items_list) == True:
+        item = functions.create_value(items_list)
+        if item != False:
+            new_item = write_item()
+            if functions.confirmation('remove item') == True:
+                items_list.change_item(item - 1, new_item)
+                input("Item changed, press enter to continue...")
 
 def mark_item(items_list):
-    item = validate_tasks(items_list)
-    if item != False:
-        confirmation = input(f"Are you sure you want to check/uncheck {items_list[item - 1]}? (Y/N): ").lower().strip()
-        if confirmation == "y":
-            items_list[item - 1].toggle()
-            input("Item marked/unmarked, press enter to continue...")
-        else:
-            input("Item not marked/unmarked, press enter to continue...")
+    if functions.check_if_empty_list(items_list) == True:
+        item = functions.create_value(items_list)
+        if item != False:
+            if functions.confirmation('remove item') == True:
+                items_list[item - 1].toggle()
+                input("Item marked/unmarked, press enter to continue...")
 
 def clear_list(items_list):
-    if not items_list:
-        input("The list is empty, press enter to continue...")
-        return False
-    else:
-        confirmation = input(f"Are you sure you want to clear the list? (Y/N): ").lower().strip()
-        if confirmation == "y":
+    if functions.check_if_empty_list(items_list) == True:
+        if functions.confirmation('clear the list') == True:
             items_list.clear()
             input("List cleared, press enter to continue...")
         else:
             input("List not cleared, press enter to continue...")
 
-def save_exit(items_list):
-    Storage.save(items_list)
+def save(items_list):
+    if functions.confirmation('save') == True:
+        conv = functions.convert_obj_to_json(items_list)
+        storage = Storage()
+        storage.save(conv)
+        input("List saved, press enter to continue...")
+
+def exit(items_list):
+    if functions.confirmation('save and exit') == True:
+        conv = functions.convert_obj_to_json(items_list)
+        storage = Storage()
+        storage.save(conv)
+        sys.exit()

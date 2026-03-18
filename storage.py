@@ -4,6 +4,11 @@ class Storage:
     def __init__(self, file="tasks.json"):
         self.File = file
 
-    def save(self, items_list):
+    def save(self, converted_list):
         with open(self.File, "w") as f:
-            json.dump(items_list, f, indent=4)
+            json.dump(converted_list, f, indent=4)
+            return 0
+
+    def load(self):
+        with open(self.File, "r") as f:
+            return json.load(f)
