@@ -10,5 +10,8 @@ class Storage:
             return 0
 
     def load(self):
-        with open(self.File, "r") as f:
-            return json.load(f)
+        try:
+            with open(self.File, "r") as f:
+                return json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            return []

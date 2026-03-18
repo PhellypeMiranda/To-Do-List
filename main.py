@@ -1,6 +1,5 @@
-from todo_list import ToDoList
 import services
-from storage import Storage
+
 
 def choices(menu, items_list):
     match menu:
