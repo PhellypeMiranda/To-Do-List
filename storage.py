@@ -2,7 +2,7 @@ import json
 
 class Storage:
     def __init__(self, file="tasks.json"):
-        self.File = file
+        self.file = file
 
     def save(self, converted_list):
         with open(self.file, "w") as f:

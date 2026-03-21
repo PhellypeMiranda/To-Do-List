@@ -1,6 +1,5 @@
 import services
 
-
 def choices(menu, items_list):
     match menu:
         case 1:
