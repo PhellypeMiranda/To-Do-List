@@ -1,6 +1,20 @@
 import os
 from models.todo_list import ToDoList
 from models.tasks import Task
+from storage.storage import Storage
+
+def load_list():
+    loader = Storage()
+    items_list = loader.load()
+    converted_list = convert_dic_to_obj(items_list)
+    return converted_list
+
+def write_item():
+    while True:
+        name = input("Enter new item's name: ").strip().capitalize()
+        if name:
+            return name
+        input("Can't be empty, try again!")
 
 def check_if_not_empty(items_list):
     if not items_list:

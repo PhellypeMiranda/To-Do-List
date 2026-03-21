@@ -1,28 +1,29 @@
-import services.todo_services as services
+from services.todo_services import Services
 
-def choices(menu, items_list):
+def choices(menu, services):
+
     match menu:
         case 1:
-            services.add_item(items_list)
+            services.add_item()
         case 2:
-            services.remove_item(items_list)
+            services.remove_item()
         case 3:
-            services.modify_item(items_list)
+            services.modify_item()
         case 4:
-            services.mark_item(items_list)
+            services.mark_item()
         case 5:
-            services.clear_list(items_list)
+            services.clear_list()
         case 6:
-            services.save(items_list)
+            services.save()
         case 7:
-            services.exit(items_list)
+            services.exit()
         case _:
             input("invalid input, try again!")
 
 def main():
-    items_list = services.load_list()
+    services = Services()
     while True:
-        services.show_list(items_list)
+        services.show_list()
         try:
             menu = int(input("\nMenu:\n"
                              "1 - Add an item to the list.\n"
@@ -34,7 +35,7 @@ def main():
                              "7 - Exit.\n"
                              "Select an option: "))
 
-            choices(menu, items_list)
+            choices(menu, services)
 
         except ValueError:
             input("invalid input, try again!")
