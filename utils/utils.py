@@ -1,6 +1,6 @@
 import os
-from todo_list import ToDoList
-from tasks import Task
+from models.todo_list import ToDoList
+from models.tasks import Task
 
 def check_if_not_empty(items_list):
     if not items_list:

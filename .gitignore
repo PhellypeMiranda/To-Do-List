@@ -208,4 +208,4 @@ __marimo__/
 
 # Tasks.json
 # This file is where the program save the items of the list.
-tasks.json
+data/tasks.json

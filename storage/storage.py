@@ -1,8 +1,10 @@
 import json
+from config import DATA_DIR
 
 class Storage:
     def __init__(self, file="tasks.json"):
-        self.file = file
+        self.file = DATA_DIR / file
+        self.file.parent.mkdir(parents=True, exist_ok=True)
 
     def save(self, converted_list):
         with open(self.file, "w") as f:
