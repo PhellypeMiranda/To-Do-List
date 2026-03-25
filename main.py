@@ -14,14 +14,13 @@ def choices(menu, services):
         case 5:
             services.clear_list()
         case 6:
-            services.save()
-        case 7:
-            services.exit()
+            services.exit_program()
         case _:
             input("invalid input, try again!")
 
 def main():
     services = Services()
+    services.load_on_menu()
     while True:
         services.show_list()
         try:
@@ -31,8 +30,7 @@ def main():
                              "3 - Modify an item from the list.\n"
                              "4 - Mark/Unmark the item as checked.\n"
                              "5 - Clear to do list.\n"
-                             "6 - Save list.\n"
-                             "7 - Exit.\n"
+                             "6 - Exit.\n"
                              "Select an option: "))
 
             choices(menu, services)
