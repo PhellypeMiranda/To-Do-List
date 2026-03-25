@@ -53,6 +53,20 @@ class Services:
                     self.save()
                     input("Item changed, press enter to continue...")
 
+    def reorder_item(self):
+        if utils.check_if_not_empty(self.items_list):
+            item = utils.create_value(self.items_list)
+            if item:
+                print("Which position do you want to put it?")
+                index = utils.create_value(self.items_list)
+                if index:
+                    if utils.confirmation("change item's place"):
+                        item_copy = self.items_list[item - 1]
+                        self.items_list.remove_item(item - 1)
+                        self.items_list.insert_item(index - 1, item_copy)
+                        self.save()
+                        input("Item changed, press enter to continue...")
+
     def mark_item(self):
         if utils.check_if_not_empty(self.items_list):
             item = utils.create_value(self.items_list)

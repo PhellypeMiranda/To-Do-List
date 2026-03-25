@@ -10,10 +10,12 @@ def choices(menu, services):
         case 3:
             services.modify_item()
         case 4:
-            services.mark_item()
+            services.reorder_item()
         case 5:
-            services.clear_list()
+            services.mark_item()
         case 6:
+            services.clear_list()
+        case 7:
             services.exit_program()
         case _:
             input("invalid input, try again!")
@@ -28,9 +30,10 @@ def main():
                              "1 - Add an item to the list.\n"
                              "2 - Remove an item from the list.\n"
                              "3 - Modify an item from the list.\n"
-                             "4 - Mark/Unmark the item as checked.\n"
-                             "5 - Clear to do list.\n"
-                             "6 - Exit.\n"
+                             "4 - Reorder an item from the list.\n"
+                             "5 - Mark/Unmark the item as checked.\n"
+                             "6 - Clear to do list.\n"
+                             "7 - Exit.\n"
                              "Select an option: "))
 
             choices(menu, services)

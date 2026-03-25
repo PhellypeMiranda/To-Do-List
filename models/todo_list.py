@@ -26,6 +26,9 @@ class ToDoList:
     def remove_item(self, index):
         del self.tasks[index]
 
+    def insert_item(self, value, task):
+        self.tasks.insert(value, task)
+
     def change_item(self, index, task):
         self.tasks[index].name = task
 
