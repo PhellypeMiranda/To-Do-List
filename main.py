@@ -1,9 +1,9 @@
-from infrastructure.repositories.repositoryjson import RepositoryJson
+from infrastructure.repositories.repository_json import RepositoryJson
 from interface.ui import TodoUI
 from use_cases.add_task import AddTask
 from use_cases.remove_task import RemoveTask
 from use_cases.modify_task import ModifyTask
-from use_cases.Mark_task import MarkTask
+from use_cases.mark_task import MarkTask
 from use_cases.clear_list import ClearList
 
 
